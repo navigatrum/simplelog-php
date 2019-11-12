@@ -202,6 +202,42 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
             [false],
         ];
     }
+    
+    /**
+     * @testCase     setFormatCallback sets the format_callback property.
+     * @dataProvider dataProviderForSetFormatCallback
+     * @param        callable $callback
+     * @throws       \Exception
+     */
+    public function testSetFormatCallback(callable $callback)
+    {
+        // Given
+        $format_callback_property = new \ReflectionProperty(Logger::class, 'format_callback');
+        $format_callback_property->setAccessible(true);
+        
+        // When
+        $this->logger->setFormatCallback($format_callback);
+        
+        // Then
+        $this->assertEquals($format_callback, $format_callback_property->getValue($this->logger));
+    }
+    
+    /**
+     * @return array [callback]
+     */
+    public function dataProviderForSetFormatCallback() :array
+    {
+        return [
+            [function esample(){}],
+            [function(){}],
+            [[$this, 'exampleFormatCallback']],
+        ];
+    }
+    
+    private function exampleFormatCallback($level, $pid, $message, $data, $exception) :string
+    {
+        return $message . PHP_EOL;
+    }
 
     /**
      * @testCase     Logger creates properly formatted log lines with the right log level.
