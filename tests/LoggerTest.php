@@ -228,8 +228,14 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     public function dataProviderForSetFormatCallback() :array
     {
         return [
-            [function esample(){}],
-            [function(){}],
+            [function esample()
+             {
+             }
+            ],
+            [function ()
+             {
+             }
+            ],
             [[$this, 'exampleFormatCallback']],
         ];
     }
