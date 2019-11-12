@@ -62,7 +62,7 @@ class Logger implements \Psr\Log\LoggerInterface
      * Callback to be called instead of `formatLogLine`
      * @var callable
      */
-    private $format_callback; 
+    private $format_callback;
 
     /**
      * Log fields separated by tabs to form a TSV (CSV with tabs).
@@ -139,6 +139,10 @@ class Logger implements \Psr\Log\LoggerInterface
         $this->stdout = $stdout;
     }
     
+    /**
+     * Set a callback to format a custom log line.
+     * If set, it will be used instead of `formatLogLine`.
+     */
     public function setFormatCallback(callable $callback)
     {
         $this->format_callback = $callback;
