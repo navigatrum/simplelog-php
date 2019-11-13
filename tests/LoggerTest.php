@@ -229,18 +229,6 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     {
         return [
             [
-                function sampleCallbackFormat($level, $pid, $message, $data, $exception) :string
-                {
-                    return $level . ' ' . $message . PHP_EOL;
-                }
-            ],
-            [
-                function ($level, $pid, $message, $data, $exception) :string
-                {
-                    return $pid . ' ' . '[' . $level . ']' . $message . PHP_EOL;
-                }
-            ],
-            [
                 [$this, 'exampleFormatCallback']
             ],
         ];
