@@ -216,10 +216,10 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
         $format_callback_property->setAccessible(true);
         
         // When
-        $this->logger->setFormatCallback($format_callback);
+        $this->logger->setFormatCallback($callback);
         
         // Then
-        $this->assertEquals($format_callback, $format_callback_property->getValue($this->logger));
+        $this->assertEquals($callback, $format_callback_property->getValue($this->logger));
     }
     
     /**
