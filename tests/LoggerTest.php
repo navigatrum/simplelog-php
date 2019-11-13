@@ -205,31 +205,19 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     
     /**
      * @testCase     setFormatCallback sets the format_callback property.
-     * @dataProvider dataProviderForSetFormatCallback
-     * @param        callable $callback
      * @throws       \Exception
      */
-    public function testSetFormatCallback(callable $callback)
+    public function testSetFormatCallback()
     {
         // Given
         $format_callback_property = new \ReflectionProperty(Logger::class, 'format_callback');
         $format_callback_property->setAccessible(true);
         
         // When
-        $this->logger->setFormatCallback($callback);
+        $this->logger->setFormatCallback([$this, 'exampleFormatCallback']);
         
         // Then
-        $this->assertEquals($callback, $format_callback_property->getValue($this->logger));
-    }
-    
-    /**
-     * @return array [callback]
-     */
-    public function dataProviderForSetFormatCallback() :array
-    {
-        return [
-            [$this, 'exampleFormatCallback']
-        ];
+        $this->assertEquals([$this, 'exampleFormatCallback'], $format_callback_property->getValue($this->logger));
     }
     
     private function exampleFormatCallback($level, $pid, $message, $data, $exception) :string
