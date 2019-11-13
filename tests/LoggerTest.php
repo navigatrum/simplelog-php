@@ -228,15 +228,21 @@ class LoggerTest extends \PHPUnit\Framework\TestCase
     public function dataProviderForSetFormatCallback() :array
     {
         return [
-            [function esample()
-             {
-             }
+            [
+                function sampleCallbackFormat($level, $pid, $message, $data, $exception) :string
+                {
+                    return $level . ' ' . $message . PHP_EOL;
+                }
             ],
-            [function ()
-             {
-             }
+            [
+                function ($level, $pid, $message, $data, $exception) :string
+                {
+                    return $pid . ' ' . '[' . $level . ']' . $message . PHP_EOL;
+                }
             ],
-            [[$this, 'exampleFormatCallback']],
+            [
+                [$this, 'exampleFormatCallback']
+            ],
         ];
     }
     
